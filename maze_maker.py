@@ -1,13 +1,16 @@
 import random
 from typing import NamedTuple
+from maze_search import depth_first_search, get_path
 
 
 class Location(NamedTuple):
+    """Maze locations in the grid as x, y coordinates"""
     x: int
     y: int
 
 
 class MazeSymbol:
+    """Symbols to use when printing the maze"""
     start = "S"
     finish = "F"
     wall = "X"
@@ -62,3 +65,30 @@ class Maze:
     def clear_path(self, path):
         for loc in path:
             self.maze[loc.x][loc.y] = MazeSymbol.empty
+
+
+    def __str__(self):
+        """Prints the current maze state if used outside of browser, mainly for debugging"""
+        pretty_printed = ''
+        for num, row in enumerate(self.maze):
+            if num == 0:
+                pretty_printed += "".join("_" for i in range(self.columns + 2)) + "\n"
+            pretty_printed += "|"
+            for space in row:
+                pretty_printed += space
+            if num == (self.columns - 1):
+                pretty_printed += "|\n" + "".join("-" for i in range(self.columns + 2)) + "\n"
+                break
+            pretty_printed += "|\n"
+        return pretty_printed
+
+
+if __name__ == "__main__":
+    m = Maze()
+    print(m)
+    path = depth_first_search(m.start, m.finish_line, m.frontier)
+    if path is None:
+        print('No successful solution for this maze')
+    final_path = get_path(path)
+    m.draw_path(final_path)
+    print(m)
