@@ -32,9 +32,11 @@
                         <h4 style="margin-top:15px;">Generate a new random maze:</h4>
                         <div class="row">
                             <div class="col">
-                                <a href="{{ url_for('home') }}">
-                                    <button type="button" class="btn btn-danger">New Random Maze</button>
-                                </a>
+                                <form action="{{ url_for('home') }}" method="post">
+                                    <button type="submit" class="btn btn-success" name="rand">Randomize Walls</button>
+                                    <button type="submit" class="btn btn-info" name="rand" value="loc">
+                                        Randomize Finish Location</button>
+                                </form>
                             </div>
                         </div>
                     </div>
