@@ -1,6 +1,7 @@
 import random
+from math import sqrt
 from typing import NamedTuple
-from maze_search import depth_first_search, get_path
+from maze_search import depth_first_search, astar
 
 
 class Location(NamedTuple):
@@ -66,7 +67,6 @@ class Maze:
         for loc in path:
             self.maze[loc.x][loc.y] = MazeSymbol.empty
 
-
     def __str__(self):
         """Prints the current maze state if used outside of browser, mainly for debugging"""
         pretty_printed = ''
@@ -83,12 +83,34 @@ class Maze:
         return pretty_printed
 
 
+def euclidean_distance(finish_line):
+    def distance(loc):
+        xdistance = loc.column - finish_line.column
+        ydistance = loc.row - finish_line.row
+        return sqrt((xdistance ** 2) + (ydistance ** 2))
+    return distance
+
+
+def manhattan_distance(finish):
+    def distance(loc):
+        xdistance = abs(loc.y - finish.y)
+        ydistance = abs(loc.x - finish.x)
+        return xdistance + ydistance
+    return distance
+
+
 if __name__ == "__main__":
     m = Maze()
     print(m)
-    path = depth_first_search(m.start, m.finish_line, m.frontier)
-    if path is None:
+    depth_path, depth_search = depth_first_search(m.start, m.finish_line, m.frontier)
+    if depth_path is None:
         print('No successful solution for this maze')
-    final_path = get_path(path)
-    m.draw_path(final_path)
+    m.draw_path(depth_path)
+    print(m)
+    m.clear_path(depth_path)
+    distance = manhattan_distance(m.finish)
+    astar_path, astar_search = astar(m.start, m.finish_line, m.frontier, distance)
+    if astar_path is None:
+        print('No successful solution to this maze.')
+    m.draw_path(astar_path)
     print(m)

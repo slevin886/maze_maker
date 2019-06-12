@@ -9,12 +9,50 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-4">
-                <table id="game"></table>
-                <script src="{{ url_for('static', filename='board/jsboard.min.js') }}"></script>
-                <script>var maze_map = {{ maze_map|tojson }}</script>
-                <script src="{{ url_for('static', filename='boardcreation.js') }}"></script>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h4>See how each algorithm searches:</h4>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-success" id="drawPathDFS">Depth-First Search</button>
+                                <button type="button" class="btn btn-info" id="drawPathBFS">Breadth-First Search</button>
+                                <button type="button" class="btn btn-warning" id="drawPathAstar">A* Search</button>
+                            </div>
+                        </div>
+                        <h4 style="margin-top:15px;">See the final paths:</h4>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-success" id="finalDFS">Depth-First Path</button>
+                                <button type="button" class="btn btn-info" id="finalBFS">Breadth-First Path</button>
+                                <button type="button" class="btn btn-warning" id="finalAstar">A* Search</button>
+                            </div>
+                        </div>
+                        <h4 style="margin-top:15px;">Generate a new random maze:</h4>
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ url_for('home') }}">
+                                    <button type="button" class="btn btn-danger">New Random Maze</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <table id="game"></table>
+                        <script src="{{ url_for('static', filename='board/jsboard.min.js') }}"></script>
+                        <script>var maze_map = {{ maze_map|tojson }}; var dfs_path = {{ dfs_path|tojson }};
+                            var bfs_path = {{ bfs_path|tojson }}; var astar_path = {{ astar_path|tojson }};
+                            var final_dfs = {{ final_dfs|tojson }}; var final_bfs = {{ final_bfs|tojson }};
+                            var final_astar = {{ final_astar|tojson }};
+                        </script>
+                        <script src="{{ url_for('static', filename='boardcreation.js') }}"></script>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
