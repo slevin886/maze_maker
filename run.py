@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from flask import render_template, Flask
 from maze_maker import Maze, manhattan_distance
 from maze_search import depth_first_search, breadth_first_search, astar
