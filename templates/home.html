@@ -64,21 +64,42 @@
                 </div>
             </div>
         </div>
-        <h2>Algorithm Statistics w/ a <i>Randomized Finish Location</i></h2>
-        <div class="row mt-5">
+        <hr>
+        <h2>Algorithm Statistics w/ <i>Randomized</i> Finish Location</h2>
+        <h5># of Trials: <strong>100,000</strong></h5>
+        <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
+        <h5>No Possible Solution: <strong>9.08%</strong></h5>
+        <div class="row mt-5 mb-3">
             <div class="col-6">
-                <h6>Final Path Length (100,000 mazes)</h6>
+                <h6><strong>Final Path Length</strong></h6>
                 <p>Avg. DFS: <strong> 18.96</strong>,  Avg. BFS:<strong> 8.85</strong>, Avg. A*:<strong> 8.85</strong></p>
                 <div id="rand_search_final">
                 </div>
             </div>
             <div class="col-6">
-                <h6>Spaces Searched (100,000 mazes)</h6>
+                <h6><strong>Spaces Searched</strong></h6>
                 <p>Avg. DFS: <strong> 38.82</strong>,  Avg. BFS:<strong> 38.63</strong>, Avg. A*:<strong> 19.96</strong></p>
                 <div id="rand_search_space">
                 </div>
             </div>
             <script src="{{ url_for('static', filename='stats/rand_search_final.js') }}"></script>
+        </div>
+        <hr>
+        <h2>Algorithm Statistics w/ <i>Bottom Right</i> Finish Location</h2>
+        <h5># of Trials: <strong>100,000</strong></h5>
+        <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
+        <h5>No Possible Solution: <strong>15.8%</strong></h5>
+        <div class="row mt-5">
+            <div class="col-6">
+                <h6><strong>Final Path Length</strong></h6>
+                <p>Avg. DFS: <strong> 18.66</strong>,  Avg. BFS:<strong> 17.06</strong>, Avg. A*:<strong> 17.06</strong></p>
+
+            </div>
+            <div class="col-6">
+                <h6><strong>Spaces Searched</strong></h6>
+                <p>Avg. DFS: <strong> 22.22</strong>,  Avg. BFS:<strong> 76.95</strong>, Avg. A*:<strong> 50.87</strong></p>
+
+            </div>
         </div>
     </div>
 </body>
