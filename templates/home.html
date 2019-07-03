@@ -65,7 +65,8 @@
             </div>
         </div>
         <hr>
-        <h2>Algorithm Statistics w/ <i>Randomized</i> Finish Location</h2>
+        <h1>Algorithm Statistics</h1>
+        <h2>w/ <i>Randomized</i> Finish Location</h2>
         <h5># of Trials: <strong>100,000</strong></h5>
         <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
         <h5>No Possible Solution: <strong>9.08%</strong></h5>
@@ -85,7 +86,7 @@
             <script src="{{ url_for('static', filename='stats/rand_search_final.js') }}"></script>
         </div>
         <hr>
-        <h2>Algorithm Statistics w/ <i>Bottom Right</i> Finish Location</h2>
+        <h2>w/ <i>Bottom Right</i> Finish Location</h2>
         <h5># of Trials: <strong>100,000</strong></h5>
         <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
         <h5>No Possible Solution: <strong>15.8%</strong></h5>
@@ -93,13 +94,16 @@
             <div class="col-6">
                 <h6><strong>Final Path Length</strong></h6>
                 <p>Avg. DFS: <strong> 18.66</strong>,  Avg. BFS:<strong> 17.06</strong>, Avg. A*:<strong> 17.06</strong></p>
-
+                <div id="search_final">
+                </div>
             </div>
             <div class="col-6">
                 <h6><strong>Spaces Searched</strong></h6>
                 <p>Avg. DFS: <strong> 22.22</strong>,  Avg. BFS:<strong> 76.95</strong>, Avg. A*:<strong> 50.87</strong></p>
-
+                <div id="search_space">
+                </div>
             </div>
+            <script src="{{ url_for('static', filename='stats/set_search_final.js') }}"></script>
         </div>
     </div>
 </body>
