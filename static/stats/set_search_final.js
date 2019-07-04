@@ -14,8 +14,9 @@ var dataFinalPath = [{"name": "A*",
                      "y": [45228, 22525, 3420, 9828, 325, 230, 693, 1078, 138, 416, 22, 47, 94, 8, 1, 4, 1]}];
 
 var dataFinalLayout = {"xaxis": {"title": {"text": "Final Path Length"}},
-                           "yaxis": {"title": {"text": "# of Occurrences"}},
-                           "legend": {x: 0.7, y: 1.1, font: {size: 8}}};
+                       "yaxis": {"title": {"text": "# of Occurrences"}},
+                       "legend": {x: 0.7, y: 1.1, font: {size: 8}},
+                       "margin":{"t": 0}};
 
 Plotly.newPlot('search_final', dataFinalPath, dataFinalLayout, {"displayModeBar": false});
 
@@ -32,7 +33,8 @@ var dataSearch =  [{"name": "A*",
                      "y": [5349, 16659, 3422, 14548, 298, 5348, 2367, 2924, 6258, 4705, 7990, 1484, 185, 29, 532, 672, 1968, 61, 1661, 1066, 750, 1325, 499, 139, 159, 453, 956, 836, 108, 278, 35, 238, 372, 111, 45, 41, 64, 5, 1, 16, 13, 14, 24, 3, 13, 2, 5, 13, 6, 2, 5, 1]}];
 
 var dataSearchLayout = {"xaxis": {"title": {"text": "# of Spaces Searched"}},
-                           "yaxis": {"title": {"text": "# of Occurrences"}},
-                           "legend": {x: 0.7, y: 1.1, font: {size: 8}}};
+                        "yaxis": {"title": {"text": "# of Occurrences"}},
+                        "legend": {x: 0.7, y: 1.1, font: {size: 8}},
+                        "margin":{"t": 0}};
 
 Plotly.newPlot('search_space', dataSearch, dataSearchLayout, {"displayModeBar": false});

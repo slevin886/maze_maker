@@ -12,7 +12,8 @@ var dataRandFinalPath = [{"name": "A*",
 
 var dataRandFinalLayout = {"xaxis": {"title": {"text": "Final Path Length"}},
                            "yaxis": {"title": {"text": "# of Occurrences"}},
-                           "legend": {x: 0.7, y: 1.1, font: {size: 8}}};
+                           "legend": {x: 0.7, y: 1.1, font: {size: 8}},
+                           "margin":{"t": 0}};
 
 Plotly.newPlot('rand_search_final', dataRandFinalPath, dataRandFinalLayout, {"displayModeBar": false});
 
@@ -30,6 +31,7 @@ var dataRandSearch = [{"name": "A*",
 
 var dataRandSearchLayout = {"xaxis": {"title": {"text": "# of Spaces Searched"}},
                            "yaxis": {"title": {"text": "# of Occurrences"}},
-                           "legend": {x: 0.7, y: 1.1, font: {size: 8}}};
+                           "legend": {x: 0.7, y: 1.1, font: {size: 8}},
+                           "margin":{"t": 0}};
 
 Plotly.newPlot('rand_search_space', dataRandSearch, dataRandSearchLayout, {"displayModeBar": false});

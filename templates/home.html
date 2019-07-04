@@ -13,9 +13,23 @@
         <div class="row mt-3">
             <div class="col">
                 <h1>Search Algorithm Performance & Mazes</h1>
-                <hr>
+                <p>Search algorithms play a critical role in a diverse array of fields- from robotics and transportation
+                    to gaming, operations, and, of course, computing. A search algorithm is a structured computational
+                    process to find what you need (if it exists and can be reached) and how to get there. Below, you can
+                    explore how three of the most common algorithms <i>search</i> for a solution to a simple maze and the
+                    <i>path</i> they recommend to get there. You will also find statistics on their relative performance
+                    after searching 100,000 mazes with both a fixed and random finish location.</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <a href="https://github.com/slevin886/maze_maker">
+                    <img src="{{ url_for('static', filename='GitHub_Logo.png') }}" class="img-fluid"
+                         alt="Github logo" width="50px">Check out my code on GitHub
+                </a>
+            </div>
+        </div>
+        <hr>
         <div class="row mt-3 mb-5">
             <div class="col">
                 <div class="row">
@@ -65,8 +79,8 @@
             </div>
         </div>
         <hr>
-        <h1>Algorithm Statistics</h1>
-        <h2>w/ <i>Randomized</i> Finish Location</h2>
+        <h1>Maze Performance Statistics</h1>
+        <h2 style="color:blue;">w/ <i>Randomized</i> Finish Location</h2>
         <h5># of Trials: <strong>100,000</strong></h5>
         <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
         <h5>No Possible Solution: <strong>9.08%</strong></h5>
@@ -85,8 +99,7 @@
             </div>
             <script src="{{ url_for('static', filename='stats/rand_search_final.js') }}"></script>
         </div>
-        <hr>
-        <h2>w/ <i>Bottom Right</i> Finish Location</h2>
+        <h2 style="color:blue;">w/ <i>Bottom Right</i> Finish Location</h2>
         <h5># of Trials: <strong>100,000</strong></h5>
         <h5>Percentage of tiles as walls: <strong>20%</strong></h5>
         <h5>No Possible Solution: <strong>15.8%</strong></h5>
