@@ -1,105 +1,60 @@
-// Maze Board, thank you https://github.com/danielborowski/jsboard for the useful board creation package
+// 6 array variables representing search paths have been passed to a separate script by the python backend
+// including: final_bfs, bfs_path, final_astar... etc.
+
 var b = jsboard.board({ attach: "game", size: "10x10"});
 
-// Maze Symbols
-var wall = jsboard.piece({ text: "X", fontSize: "30px", textAlign: "center", width:"40px", height:"40px", background: "red", borderRadius: "5px"});
-var path = jsboard.piece({ text: "*", fontsize: "15px", textAlign: "center", width:"40px", height:"40px", background: "green",borderRadius: "5px"});
-var start = jsboard.piece({ text: "start", fontsize: "5px", textAlign: "center", width:"40px", height:"40px", background: "green", borderRadius: "5px"});
-var finish = jsboard.piece({ text: "finish", fontsize: "15px", textAlign: "center", width:"40px", height:"40px", background: "gold", borderRadius: "5px"});
-var empty = jsboard.piece({ text: " ", fontsize: "0px", textAlign: "center", width:"40px", height:"40px", background: "blue", borderRadius: "5px"});
+const commonStyles = { textAlign: "center", width: "40px", height: "40px", borderRadius: "5px" };
 
+// Maze Symbols
+const wall = jsboard.piece({ text: "X", fontsize: "30px", background: "red", ...commonStyles });
+const path = jsboard.piece({ text: "*", fontsize: "15px", background: "green", ...commonStyles });
+const start = jsboard.piece({ text: "start", fontsize: "5px", background: "green", ...commonStyles });
+const finish = jsboard.piece({ text: "finish", fontsize: "15px", background: "gold", ...commonStyles });
+const empty = jsboard.piece({ text: " ", fontsize: "0px", background: "blue", ...commonStyles });
+
+const rowLookup = {
+  X: wall,
+  S: start,
+  F: finish,
+  '*': path
+};
 
 function drawMaze(){
-    maze_map.forEach(function(row, xaxis){
-        row.forEach(function(value, yaxis){
-            switch(value){
-                case " ":
-                    b.cell([xaxis, yaxis]).place(empty.clone());
-                    break;
-                case "X":
-                    b.cell([xaxis, yaxis]).place(wall.clone());
-                    break;
-                case "S":
-                    b.cell([xaxis, yaxis]).place(start.clone());
-                    break;
-                case "F":
-                    b.cell([xaxis, yaxis]).place(finish.clone());
-                    break;
-                case "*":
-                    b.cell([xaxis, yaxis]).place(path.clone());
-                    break;
-            };
+    maze_map.forEach(function(row, xAxis){
+        row.forEach(function(value, yAxis){
+            const symbol = rowLookup[value] || empty;
+            b.cell([xAxis, yAxis]).place(symbol.clone());
+            });
         });
-    });
-};
+    };
+
 
 drawMaze();
 
-function drawPathDepth(){
-    dfs_path.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
-};
-
-function drawPathBreadth(){
-    bfs_path.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
-};
-
-function drawPathAstar(){
-    astar_path.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
-};
-
-
-function drawPathFinalBreadth(){
-    final_bfs.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
-};
-
-function drawPathFinalDepth(){
-    final_dfs.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
-};
-
-function drawPathFinalAstar(){
-    final_astar.forEach(function(coord, index){
-        setTimeout(function(){
-        b.cell([coord[0], coord[1]]).place(path.clone());
-        }, 150 * (index + 1));
-    });
+// to allow each function to finish, ensure that a delay is as long as the timeout
+var lastClick = 0;
+var delay = 0;
+// The timeout is present to slow down the visualization of the path drawing
+const draw = pathProp => {
+  if (lastClick >= (Date.now() - delay)) {
+    return;
+  };
+  lastClick = Date.now();
+  delay = 150 * pathProp.length;
+  drawMaze();
+  pathProp.forEach((coord, index) => {
+    setTimeout(() => {
+      b.cell([coord[0], coord[1]]).place(path.clone());
+      }, 150 * (index + 1));
+  });
 };
 
 // Draw Search Paths
-document.getElementById("drawPathDFS").addEventListener("click", drawPathDepth);
-document.getElementById("drawPathDFS").addEventListener("click", drawMaze);
-
-document.getElementById("drawPathBFS").addEventListener("click", drawPathBreadth);
-document.getElementById("drawPathBFS").addEventListener("click", drawMaze);
-
-document.getElementById("drawPathAstar").addEventListener("click", drawPathAstar);
-document.getElementById("drawPathAstar").addEventListener("click", drawMaze);
+document.getElementById("drawPathDFS").addEventListener("click", () => draw(dfs_path));
+document.getElementById("drawPathBFS").addEventListener("click", () => draw(bfs_path));
+document.getElementById("drawPathAstar").addEventListener("click", () => draw(astar_path));
 
 // Draw Final Paths
-document.getElementById("finalBFS").addEventListener("click", drawPathFinalBreadth);
-document.getElementById("finalBFS").addEventListener("click", drawMaze);
-
-document.getElementById("finalDFS").addEventListener("click", drawPathFinalDepth);
-document.getElementById("finalDFS").addEventListener("click", drawMaze);
-
-document.getElementById("finalAstar").addEventListener("click", drawPathFinalAstar);
-document.getElementById("finalAstar").addEventListener("click", drawMaze);
+document.getElementById("finalBFS").addEventListener("click", () => draw(final_bfs));
+document.getElementById("finalDFS").addEventListener("click", () => draw(final_dfs));
+document.getElementById("finalAstar").addEventListener("click", () => draw(final_astar));
